@@ -1,0 +1,29 @@
+// [Fonts]
+$font-name-default: 'Roboto', sans-serif;
+$font-size-default: 16px;
+$font-color-default: #ffffff;
+
+// [Layout step]
+$grid-offset-step: 4px;
+
+// [Animations]
+$animation-step: 160ms;
+
+// [Gaps]
+@for $i from 1 through 30 {
+  .gap-#{$i} {
+    gap: #{$i}px;
+  }
+}
+
+// [Icon sizes]
+@for $i from 1 through 40 {
+  .icon-#{$i} {
+    font-size: #{$i}px;
+  }
+}
+
+.pointer {
+  user-select: none;
+  cursor: pointer;
+}

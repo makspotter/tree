@@ -1,0 +1,17 @@
+@use 'grid' as *;
+
+:host {
+  height: 100%;
+}
+
+.main {
+  width: 100%;
+
+  router-outlet {
+    display: none;
+  }
+
+  ::ng-deep > * {
+    @extend .g-flex-column__item;
+  }
+}

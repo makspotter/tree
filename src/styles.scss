@@ -1,1 +1,10 @@
-/* You can add global styles to this file, and also import other style files */
+@use 'fonts' as *;
+@use 'generic' as *;
+@use 'colors' as *;
+@use 'variables' as *;
+@use 'grid' as *;
+@use 'custom-scroll' as *;
+@use 'buttons' as *;
+@use '@angular/material' as mat;
+
+@include mat.core();

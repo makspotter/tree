@@ -1,0 +1,23 @@
+@use 'variables' as *;
+@use 'colors' as *;
+
+.btn-primary {
+  padding: ($grid-offset-step * 2) ($grid-offset-step * 3);
+  color: color(color-brand-dark);
+  border: 1px solid rgba(color(color-brand-dark), 0.7);
+  border-radius: 6px;
+  transition: all $animation-step ease-in-out;
+  opacity: 0.8;
+
+  &:hover:not(:disabled) {
+    @extend .pointer;
+
+    opacity: 1;
+  }
+
+  &:disabled {
+    color: color(color-el-disabled);
+    border-color: color(color-el-disabled);
+    cursor: not-allowed;
+  }
+}

@@ -1,0 +1,19 @@
+@use 'variables' as *;
+@use 'colors' as *;
+
+.node {
+  @extend .pointer;
+
+  width: fit-content;
+  padding: ($grid-offset-step * 0.5) ($grid-offset-step * 2);
+  border-radius: 4px;
+  user-select: none;
+
+  &--selected {
+    color: color(color-brand);
+  }
+
+  &--draggable {
+    background-color: color(color-brand);
+  }
+}

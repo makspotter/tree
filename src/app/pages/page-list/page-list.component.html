@@ -1,0 +1,155 @@
+<div class="actions g-flex-column__item-fixed g-flex g-flex--align-center gap-24">
+  <button
+    class="btn-add btn-primary"
+    [disabled]="!selectedNode || (selectedNode && !selectedNode.expandable)"
+    (click)="onAddItems(true)">
+    Add {{ COUNT_ITEMS_FOR_ADD }} folders
+  </button>
+
+  <button
+    class="btn-add btn-primary"
+    [disabled]="!selectedNode || (selectedNode && !selectedNode.expandable)"
+    (click)="onAddItems(false)">
+    Add {{ COUNT_ITEMS_FOR_ADD }} files
+  </button>
+</div>
+
+<div class="content g-flex-column__item g-flex">
+  <div class="panel__tree g-flex__item-fixed g-scroll">
+    <mat-tree
+      class="tree"
+      [dataSource]="dataSource"
+      [treeControl]="flatTreeControl">
+      <mat-tree-node
+        *matTreeNodeDef="let node"
+        matTreeNodeToggle
+        matTreeNodePadding
+        class="g-flex g-flex--align-center color-brand-dark"
+        [class.drop--area]="dragNodeExpandOverNode === node && node.expandable"
+        [class.drop--disable]="dragNodeExpandOverNode === node && !node.expandable"
+        (dragover)="handleDragOver($event, node)"
+        (dragend)="handleDragEnd($event)"
+        (drop)="handleDrop($event, node)">
+        <mat-icon
+          *ngIf="node.icon">
+          {{ node.icon }}
+        </mat-icon>
+
+        <div
+          class="node-label"
+          [class.node-label--draggable]="dragNode === node"
+          [class.node-label--selected]="selectedNode === node"
+          draggable="true"
+          (dragstart)="handleDragStart(node)"
+          (click)="onSelectNode(node)">
+          {{ node.label }}
+        </div>
+
+        <mat-icon
+          class="icon-btn g-flex g-flex--align-center g-flex--justify-center color-brand-dark"
+          (click)="deleteItem(node)">
+          delete_outline
+        </mat-icon>
+      </mat-tree-node>
+
+      <mat-tree-node
+        *matTreeNodeDef="let node; when: hasChild"
+        matTreeNodePadding
+        class="g-flex g-flex--align-center"
+        [class.drop--area]="dragNodeExpandOverNode === node && node.expandable"
+        [class.drop--disable]="dragNodeExpandOverNode === node && !node.expandable"
+        (dragover)="handleDragOver($event, node)"
+        (dragend)="handleDragEnd($event)"
+        (drop)="handleDrop($event, node)">
+        <mat-icon
+          class="icon-btn g-flex g-flex--align-center g-flex--justify-center"
+          matTreeNodeToggle
+          [attr.aria-label]="'toggle ' + node.label">
+          {{ flatTreeControl.isExpanded(node) ? 'expand_more' : 'chevron_right' }}
+        </mat-icon>
+
+        <mat-icon
+          *ngIf="node.icon">
+          {{ node.icon }}
+        </mat-icon>
+
+        <div
+          class="node-label"
+          [class.node-label--draggable]="dragNode === node"
+          [class.node-label--selected]="selectedNode === node"
+          draggable="true"
+          (dragstart)="handleDragStart(node)"
+          (click)="onSelectNode(node)">
+          {{ node.label }}
+        </div>
+
+        <mat-icon
+          *ngIf="node.level !== 0"
+          class="icon-btn g-flex g-flex--align-center g-flex--justify-center color-white"
+          (click)="deleteItem(node)">
+          delete_outline
+        </mat-icon>
+      </mat-tree-node>
+    </mat-tree>
+  </div>
+
+  <div class="resizer">
+  </div>
+
+  <div class="panel__info g-flex__item g-flex-column gap-24">
+    <ng-container *ngIf="selectedNode; else noSelectedNode">
+      <div
+        class="g-flex-column__item-fixed g-flex g-flex--align-center gap-12">
+        <div class="g-flex__item-fixed color-brand-dark">
+          Name
+        </div>
+
+        <input
+          class="g-flex__item"
+          [placeholder]="selectedNode ? (selectedNode.expandable ? 'Folder' : 'File') + ' name' : 'Select item'"
+          [formControl]="nodeNameControl">
+
+        <button
+          class="btn pointer g-flex__item-fixed color-brand-dark"
+          [disabled]="nodeNameControl.invalid || !nodeNameControl.value"
+          (click)="onRenameNode()">
+          Change name
+        </button>
+      </div>
+
+      <div class="g-flex-column__item g-flex-column gap-24">
+        <div class="g-flex-column__item-fixed g-flex__item-fixed g-flex g-flex--align-center gap-12 color-brand-dark">
+          <div>
+            Icon:
+          </div>
+
+          <mat-icon class="item-icon">
+            {{ selectedIconName }}
+          </mat-icon>
+
+          <button
+            class="btn pointer g-flex__item-fixed color-brand-dark"
+            [disabled]="selectedNode && selectedNode.icon === selectedIconName"
+            (click)="onChangeIcon()">
+            Change icon
+          </button>
+        </div>
+
+        <div class="g-flex-column__item g-flex g-flex--wrap gap-13 g-scroll-y">
+          @for (iconName of ICONS_LIST; track iconName) {
+            <mat-icon
+              class="item-icon"
+              [class.item-icon--selected]="selectedNode.icon === iconName"
+              (click)="onSelectIcon(iconName)">
+              {{ iconName + '_outline' }}
+            </mat-icon>
+          }
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-template #noSelectedNode>
+      <div class="g-flex g-flex--justify-center color-el-disabled">Select item in tree</div>
+    </ng-template>
+  </div>
+</div>

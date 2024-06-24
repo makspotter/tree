@@ -9,7 +9,10 @@
         "@schematics/angular:component": {
           "style": "scss",
           "skipTests": true,
-          "standalone": true
+          "standalone": true,
+          "inlineTemplate": false,
+          "inlineStyle": false,
+          "changeDetection": "OnPush"
         },
         "@schematics/angular:class": {
           "skipTests": true
@@ -55,8 +58,15 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/material-icons/iconfont/material-icons.scss"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/assets/styles",
+                "node_modules"
+              ]
+            },
             "scripts": []
           },
           "configurations": {
@@ -90,10 +100,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "folders-list:build:production"
+              "buildTarget": "folders-list:build:production"
             },
             "development": {
-              "browserTarget": "folders-list:build:development"
+              "buildTarget": "folders-list:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -101,7 +111,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "folders-list:build"
+            "buildTarget": "folders-list:build"
           }
         },
         "test": {

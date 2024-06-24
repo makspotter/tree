@@ -1,0 +1,100 @@
+@use 'variables' as *;
+@use 'colors' as *;
+
+.actions {
+  padding: ($grid-offset-step * 4) ($grid-offset-step * 4);
+}
+
+.panel {
+  &__tree {
+    width: 400px;
+    padding: 0 ($grid-offset-step * 4);
+  }
+
+  &__info {
+    padding: 0 ($grid-offset-step * 4);
+  }
+}
+
+.tree {
+  width: 100%;
+}
+
+.resizer {
+  width: 1px;
+  height: 100%;
+  background: color(color-el-disabled);
+}
+
+.mat-tree-node {
+  overflow: visible;
+  cursor: move;
+  margin-right: -60px;
+}
+
+.drop {
+  &--area {
+    background-color: rgba(color(color-el-success), 0.5);
+    border-radius: 4px;
+  }
+
+  &--disable {
+    background-color: rgba(color(color-el-error), 0.5);
+    border-radius: 4px;
+    cursor: not-allowed !important;
+  }
+}
+
+.node-label {
+  padding: $grid-offset-step ($grid-offset-step * 2);
+  border-radius: 4px;
+  white-space: nowrap;
+
+  &--draggable {
+    background-color: rgba(color(color-brand), 0.5);
+  }
+
+  &--selected {
+    color: color(color-el-success);
+  }
+}
+
+.icon-btn {
+  display: flex !important;
+  font-size: 18px;
+  transition: all $animation-step ease-in-out;
+  opacity: 0.8;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.btn {
+  padding: ($grid-offset-step * 1.5) ($grid-offset-step * 3);
+  border-radius: 4px;
+  border: 1px solid color(color-brand-dark);
+  opacity: 0.8;
+  transition: all $animation-step ease-in-out;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  &:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+}
+
+.item-icon {
+  transition: all $animation-step ease-in-out;
+  opacity: 0.5;
+  cursor: pointer;
+
+  &--selected,
+  &:hover {
+    opacity: 1;
+  }
+}

@@ -1,0 +1,31 @@
+@for (node of nodes; track node) {
+  <div
+    class="node"
+    [class.node--selected]="node.id === selectedNode?.id"
+    [class.node--draggable]="node.id === draggableNode?.id"
+    [style.margin-left.px]="path.length * 20"
+    draggable="true"
+    (click)="selectedNodeChange.emit(node)"
+    (dragstart)="dragNodeStart.emit({ event: $event, node })"
+    (dragover)="dragNodeOver.emit({ event: $event, node })"
+    (drop)="dragNodeDrop.emit({ event: $event, node })"
+    (dragend)="dragNodeEnd.emit({ event: $event })">
+    <!--cdkDrag-->
+    {{ node.label }}
+  </div>
+
+  @if (node[childrenKey]?.length > 0) {
+    <tree-node
+      [nodes]="node[childrenKey]"
+      [selectedNode]="selectedNode"
+      [draggableNode]="draggableNode"
+      [childrenKey]="childrenKey"
+      [path]="path.concat(node.id)"
+      (selectedNodeChange)="selectedNodeChange.emit($event)"
+      (dragNodeStart)="dragNodeStart.emit($event)"
+      (dragNodeOver)="dragNodeOver.emit($event)"
+      (dragNodeDrop)="dragNodeDrop.emit($event)"
+      (dragNodeEnd)="dragNodeEnd.emit($event)" >
+    </tree-node>
+  }
+}

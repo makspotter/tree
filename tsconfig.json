@@ -8,12 +8,15 @@
     "strict": true,
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "ignoreDeprecations": "5.0",
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
     "declaration": false,
     "downlevelIteration": true,
     "experimentalDecorators": true,
+    "strictPropertyInitialization": false,
     "moduleResolution": "node",
     "importHelpers": true,
     "target": "ES2022",
@@ -22,7 +25,36 @@
     "lib": [
       "ES2022",
       "dom"
-    ]
+    ],
+    "paths": {
+      "@environments/*": [
+        "src/environments/*"
+      ],
+      "@services": [
+        "src/app/shared/services/index.ts"
+      ],
+      "@services/*": [
+        "src/app/shared/services/*"
+      ],
+      "@constants": [
+        "src/app/shared/constants/index.ts"
+      ],
+      "@constants/*": [
+        "src/app/shared/constants/*"
+      ],
+      "@interfaces": [
+        "src/app/shared/interfaces/index.ts"
+      ],
+      "@interfaces/*": [
+        "src/app/shared/interfaces/*"
+      ],
+      "@components": [
+        "src/app/shared/components/index.ts"
+      ],
+      "@components/*": [
+        "src/app/shared/interfaces/*"
+      ]
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

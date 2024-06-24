@@ -1,0 +1,85 @@
+@use 'variables' as *;
+@use 'colors' as *;
+
+/*  #CUSTOM SCROLL
+------------------------------------------- */
+$g-custom-scroll-bg: color(color-scroll);
+$g-custom-scroll-hover-bg: color(color-scroll);
+
+$scroll-bar-width: 8px;
+$scroll-bar-width-small: 6px;
+
+// # CUSTOM SCROLL
+//===========================================
+.custom-scroll {
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+
+  &--transparent {
+    &::-webkit-scrollbar {
+      width: 0!important;
+    }
+  }
+
+  // [ Chrome settings ]
+  &::-webkit-scrollbar {
+    width: $scroll-bar-width;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background: $g-custom-scroll-bg;
+
+    // [ State ] hover
+    &:hover {
+      background: $g-custom-scroll-hover-bg;
+    }
+  }
+}
+
+// [ MODE ] CUSTOM SCROLL - SMALL
+//===========================================
+.custom-scroll-small {
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+
+  // [ Chrome settings ]
+  &::-webkit-scrollbar {
+    width: $scroll-bar-width-small;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 6px;
+    background: $g-custom-scroll-bg;
+
+    // [ State ] hover
+    &:hover {
+      background: $g-custom-scroll-hover-bg;
+    }
+  }
+}
+
+.custom-scroll--horizontal {
+  // [ Chrome settings ]
+  &::-webkit-scrollbar {
+    height: $scroll-bar-width;
+  }
+}
+
+.custom-scroll-small--horizontal {
+  // [ Chrome settings ]
+  &::-webkit-scrollbar {
+    height: $scroll-bar-width-small;
+  }
+}
+
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  scrollbar-color: transparent transparent;
+
+  &::-webkit-scrollbar {
+    display: none;
+    width: 0 !important;
+  }
+}

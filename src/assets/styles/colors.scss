@@ -1,0 +1,32 @@
+// [ Solid colors ]
+$colors: (
+  'color-white': #ffffff,
+  'color-scroll': #222d40,
+  'color-background': #162030,
+  'color-brand': #04a8f0,
+  'color-brand-light': #41bbe1,
+  'color-brand-dark': #0376a8,
+  'color-el-hover': #d8e2ff,
+  'color-el-disabled': #424e63,
+  'color-el-error': #fd3c43,
+  'color-el-success': #4ac25b,
+);
+
+@function color($color-name) {
+  $color: map-get($colors, $color-name);
+
+  @return $color;
+}
+
+// [Colors]
+@each $color, $value in $colors {
+  .#{$color} {
+    color: $value;
+  }
+}
+
+$color-blue-background: rgba(30, 40, 57, 0.5);
+$color-blue-background-light: rgba(50, 62, 80, 0.24);
+
+$color-skeleton-default: #1a2538;
+$color-skeleton-gradient: #202f46;
