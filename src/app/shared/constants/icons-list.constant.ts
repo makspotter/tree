@@ -1,4 +1,4 @@
-export const ICONS_LIST = [
+export const MATERIAL_ICONS_LIST = [
   '3d_rotation',
   'ac_unit',
   'access_alarm',

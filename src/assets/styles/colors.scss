@@ -1,15 +1,20 @@
 // [ Solid colors ]
 $colors: (
   'color-white': #ffffff,
-  'color-scroll': #222d40,
-  'color-background': #162030,
+  'color-scroll': rgba(#222d40, 0.5),
+  'color-background': #ffffff,
+  'color-background-dark': #1e1e1e,
   'color-brand': #04a8f0,
   'color-brand-light': #41bbe1,
   'color-brand-dark': #0376a8,
-  'color-el-hover': #d8e2ff,
+  'color-el-hover': #0281b5,
   'color-el-disabled': #424e63,
+  'color-text-disabled': #c8c8c8,
   'color-el-error': #fd3c43,
   'color-el-success': #4ac25b,
+  'font-color-light': #dcdcdc,
+  'font-color-dark': #2c2c2c,
+  'font-color-medium': #a4a4a4
 );
 
 @function color($color-name) {

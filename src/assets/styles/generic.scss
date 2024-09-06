@@ -13,7 +13,7 @@ body {
   padding: 0;
   font-family: $font-name-default;
   font-size: $font-size-default;
-  color: $font-color-default;
+  color: color(font-color-dark);
 
   -webkit-overflow-scrolling: touch;
 }
@@ -47,4 +47,11 @@ input {
   padding: $grid-offset-step ($grid-offset-step * 2);
   font-family: $font-name-default;
   font-size: $font-size-default;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background: color(color-background-dark);
+    color: color(font-color-light);
+  }
 }

@@ -12,13 +12,15 @@ import {
   MatTreeNodePadding,
   MatTreeNodeToggle,
 } from '@angular/material/tree';
-import { ICONS_LIST } from '@constants/icons-list.constant';
+import { MATERIAL_ICONS_LIST } from '@constants/icons-list.constant';
 import { DestroyService, TreeNodeService } from '@services';
 import { takeUntil } from 'rxjs';
 import * as uuid from 'uuid';
 import { TreeItemNode } from '../../shared/models';
 
 const COUNT_ITEMS_FOR_ADD = 50;
+const NODE_LEFT_MARGIN = 24;
+const NODE_NAME_MAX_LENGTH = 40;
 
 @Component({
   selector: 'app-page-list',
@@ -39,6 +41,7 @@ const COUNT_ITEMS_FOR_ADD = 50;
   templateUrl: './page-list.component.html',
   styleUrl: './page-list.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [DestroyService],
   host: {
     class: 'g-flex-column',
   },
@@ -59,7 +62,9 @@ export class PageListComponent implements OnInit {
   selectedIconName?: string;
 
   COUNT_ITEMS_FOR_ADD = COUNT_ITEMS_FOR_ADD;
-  ICONS_LIST = ICONS_LIST;
+  MATERIAL_ICONS_LIST = MATERIAL_ICONS_LIST;
+  NODE_LEFT_MARGIN = NODE_LEFT_MARGIN;
+  NODE_NAME_MAX_LENGTH = NODE_NAME_MAX_LENGTH;
 
   hasChild = (_: number, _nodeData: TreeItemNode) => _nodeData.expandable;
 
@@ -187,18 +192,18 @@ export class PageListComponent implements OnInit {
     }
   }
 
-  onRenameNode() {
-    if (this.selectedNode && this.nodeNameControl.value) {
-      this.selectedNode.label = this.nodeNameControl.value;
+  onApply() {
+    if (!this.selectedNode) {
+      return;
     }
+
+    this.selectedNode.label = this.nodeNameControl.value!;
+    this.selectedNode.icon = this.selectedIconName;
+    this.selectedNode = undefined;
   }
 
   onSelectIcon(iconName: string) {
     this.selectedIconName = iconName;
-  }
-
-  onChangeIcon() {
-    this.selectedNode!.icon = this.selectedIconName;
   }
 
   private addNewItem(node: TreeItemNode, childTotal: number, isFolder = false) {
